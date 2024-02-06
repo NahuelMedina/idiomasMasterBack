@@ -26,12 +26,6 @@ const PaymentSchema = new Schema({
         require: true,
     },
 
-    company_payment:{
-        type: Schema.Types.ObjectId,
-        ref:"User",
-        require: true,
-    }
-
 })
 
 module.exports = model("Payment", PaymentSchema);

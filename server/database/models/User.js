@@ -26,13 +26,13 @@ const UserSchema = new Schema({
     max: 99
   },
 
-  company_name: {
-    type: String,
-    require: false,
-    unique: true,
-    minlength: 3,
-    maxlength: 30
-  },
+  // company_name: {
+  //   type: String,
+  //   require: false,
+  //   unique: false,
+  //   minlength: 3,
+  //   maxlength: 30
+  // },
 
   email:{
     type:String,
@@ -55,6 +55,13 @@ const UserSchema = new Schema({
         /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
         `Please, Insert a valid Password`
     ]
+  },
+  status:{
+      type: Boolean,
+      unique:false,
+      require: true,
+      default: true,
+      enum:[true, false]
   },
   user_course:{
     type: Schema.Types.ObjectId,
