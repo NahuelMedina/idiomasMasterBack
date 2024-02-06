@@ -68,12 +68,6 @@ const CourseSchema = new Schema({
     require: true,
   },
 
-  company_course: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    require: true,
-  },
-
   review_course:{
     type: Schema.Types.ObjectId,
     ref: "Review",
