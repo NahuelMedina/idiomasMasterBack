@@ -14,6 +14,7 @@ const getPaymentById = require('./handlers/getPaymentById');
 const getPaymentUser = require('./handlers/getPaymentUser');
 const getPaymentCourse = require('./handlers/getPaymentCourse');
 const deleteReview = require('./handlers/deleteReview');
+const deleteCourse = require("./handlers/deleteCourse")
 const deleteUser = require("./handlers/deleteUser")
 const putReview = require("./handlers/putReview")
 const putUser = require("./handlers/putUser")
@@ -36,6 +37,7 @@ routes.get("/getPayment/:id", getPaymentById)
 routes.get("/getUserPayment/:id",getPaymentUser)
 routes.get("/getCoursePayment/:id", getPaymentCourse);
 routes.delete("/deleteReview/:id", deleteReview)
+routes.put("/putDeleteCourse/:id", deleteCourse)
 routes.put("/deleteUser/:id", deleteUser)
 routes.put("/putReview/:id", putReview)
 routes.put("/putUser/:id", putUser)

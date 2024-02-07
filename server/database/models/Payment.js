@@ -19,6 +19,7 @@ const PaymentSchema = new Schema({
     unique: false,
     emun: ["Pending", "Approved", "Cancelled", "Rejected"],
   },
+  
   student_payment: {
     type: Schema.Types.ObjectId,
     ref: "User",

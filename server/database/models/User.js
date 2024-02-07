@@ -54,6 +54,7 @@ const UserSchema = new Schema({
     unique: false,
     require: false,
   },
+  
   status: {
     type: Boolean,
     unique: false,
