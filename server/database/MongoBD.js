@@ -1,13 +1,14 @@
-require(`dotenv`).config();
-const mongoose = require(`mongoose`);
+require('dotenv').config();
+const mongoose = require('mongoose');
 
-const localhost = process.env.BD_HOST;
-const dbName = process.env.BD_NAME;
+const DB_NAME = process.env.DB_NAME;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const uri_db = `mongodb+srv://idioma_master:idioma_master2025@cluster0.d8q7u1u.mongodb.net/?retryWrites=true&w=majority`;
 
-mongoose.connect(`mongodb://${localhost}/${dbName}`)
-.then(() => {
-    console.log(`Database is connected`)
-})
-.catch((error) =>{
-    console.log(`Error to connect to database`, error);
-})
+mongoose.connect(uri_db)
+  .then(() => {
+    console.log('La base de datos está conectada');
+  })
+  .catch(error => {
+    console.error('Error al conectar a la base de datos:', error.message);
+  });
