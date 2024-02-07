@@ -5,7 +5,7 @@ const getCourseByName = async (req, res) => {
     const { name } = req.query;
 
     const course = await Course.find({
-      lenguage: { $regex: name, $options: "i" },
+      language: { $regex: name, $options: "i" },
     });
 
     if (course.length === 0) {

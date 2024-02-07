@@ -43,5 +43,4 @@ routes.put("/putCourse/:id", putCourse)
 routes.put("/putPayment/:id", putPayment)
 
 
-
 module.exports = routes;
