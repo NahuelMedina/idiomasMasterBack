@@ -1,10 +1,10 @@
 const Course = require("../.././database/models/Course");
 
-const getCourseByID = async (req, res) => {
+const getUserCourses = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const course = await Course.findById(id);
+    const course = await Course.find({ student_course: id });
 
     return res.status(200).json(course);
   } catch (error) {
@@ -12,4 +12,4 @@ const getCourseByID = async (req, res) => {
   }
 };
 
-module.exports = getCourseByID;
+module.exports = getUserCourses;
