@@ -8,6 +8,13 @@ const getReviews = require("./handlers/getReviews");
 const getUserReviews = require('./handlers/getUserReviews');
 const getCourseReviews = require('./handlers/getCourseReviews');
 const getCourseByID = require('./handlers/getCourse');
+const getCourseByName = require("./handlers/getCourseName");
+const getUserCourses = require('./handlers/getUserCourses');
+const getPaymentById = require('./handlers/getPaymentById');
+const getPaymentUser = require('./handlers/getPaymentUser');
+const getPaymentCourse = require('./handlers/getPaymentCourse');
+const deleteReview = require('./handlers/deleteReview');
+const deleteUser = require("./handlers/deleteUser")
 const routes = Router()
 
 routes.post("/createUser", createUser);
@@ -18,7 +25,15 @@ routes.get("/getUser", getUser);
 routes.get("/getReviews/:id", getReviews);
 routes.get("/getUserReviews/:id", getUserReviews);
 routes.get("/getCourseReviews/:id", getCourseReviews);
+routes.get("/getCourse/name", getCourseByName)
 routes.get("/getCourse/:id", getCourseByID)
+routes.get("/getUserCourses/:id", getUserCourses)
+routes.get("/getPayment/:id", getPaymentById)
+routes.get("/getUserPayment/:id",getPaymentUser)
+routes.get("/getCoursePayment/:id", getPaymentCourse);
+routes.delete("/deleteReview/:id", deleteReview)
+routes.put("/deleteUser/:id", deleteUser)
+
 
 
 module.exports = routes;
