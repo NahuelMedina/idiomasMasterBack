@@ -1,4 +1,4 @@
-const Reviews = require("../.././database/MongoBD");
+const Reviews = require("../.././database/models/Reviews");
 
 const putReview = async (req, res) => {
   try {

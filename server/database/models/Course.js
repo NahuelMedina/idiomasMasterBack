@@ -1,7 +1,7 @@
 const { Schema, model } = require(`mongoose`);
 
 const CourseSchema = new Schema({
-  lenguage: {
+  language: {
     type: String,
     require: true,
     unique: false,
