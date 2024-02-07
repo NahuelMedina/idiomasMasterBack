@@ -6,6 +6,11 @@ const putCourse = async (req, res) => {
 
         const course = await Course.findById(id);
 
+        if(course){
+
+            course.status = false
+        }
+
         await course.save();
         return res.status(200).send("Course has been deactivated")
     } catch (error) {
