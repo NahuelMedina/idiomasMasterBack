@@ -1,18 +1,18 @@
-const { Schema, model } = require(`moongose`);
+const { Schema, model } = require(`mongoose`);
 
 const CourseSchema = new Schema({
   lenguage: {
     type: String,
     require: true,
     unique: false,
-    enum: ["English, French, German, Italian, Dutch, Portuguese"],
+    enum: ["English", "French", "German", "Italian", "Dutch", "Portuguese"],
   },
 
   level: {
     type: String,
     require: true,
     unique: false,
-    enum: ["Beginer, Intermediate, Advanced"],
+    enum: ["Beginer", "Intermediate", "Advanced"],
   },
 
   price: {
@@ -27,7 +27,7 @@ const CourseSchema = new Schema({
     type: String,
     requiere: true,
     unique: false,
-    enum: ["1 Month , 2 Months, 3 Months, 4 Months"],
+    enum: ["1 Month" , "2 Months", "3 Months", "4 Months"],
   },
 
   schedule: {
@@ -35,7 +35,7 @@ const CourseSchema = new Schema({
     require: true,
     unique: false,
     enum: [
-      "On Weekends, During the week, Monday-Wednesday-Friday, Tuesday-Thursday",
+      "On Weekends", "During the week", "Monday-Wednesday-Friday", "Tuesday-Thursday",
     ],
   },
 
@@ -62,17 +62,24 @@ const CourseSchema = new Schema({
     require: true,
     unique: false,
   },
+  status: {
+    type: Boolean,
+    unique: false,
+    require: true,
+    default: true,
+    enum: [true, false],
+  },
   student_course: {
     type: Schema.Types.ObjectId,
     ref: "User",
     require: true,
   },
 
-  review_course:{
+  review_course: {
     type: Schema.Types.ObjectId,
     ref: "Review",
     require: true,
-  }
+  },
 });
 
 module.exports = model("Course", CourseSchema);

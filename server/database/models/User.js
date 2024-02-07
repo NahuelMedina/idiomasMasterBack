@@ -1,5 +1,6 @@
 const { Schema, model } = require(`mongoose`);
-const validator = require(`validator`)
+const validator = require(`validator`);
+const bcrypt = require("bcryptjs");
 
 const UserSchema = new Schema({
   name: {
@@ -7,78 +8,83 @@ const UserSchema = new Schema({
     require: false,
     unique: false,
     minlength: 3,
-    maxlength: 30
+    maxlength: 30,
   },
 
-  lastname:{
+  lastname: {
     type: String,
     require: false,
     unique: false,
     minlength: 3,
-    maxlength: 30
+    maxlength: 30,
   },
 
-  age:{
-    type:Number,
+  age: {
+    type: Number,
     require: false,
     unique: false,
     min: 8,
-    max: 99
+    max: 99,
   },
 
-  // company_name: {
-  //   type: String,
-  //   require: false,
-  //   unique: false,
-  //   minlength: 3,
-  //   maxlength: 30
-  // },
-
-  email:{
-    type:String,
+  email: {
+    type: String,
     require: true,
     unique: true,
     lowcase: true,
-    validate:{
-        validator: (value) => validator.isEmail(value),
-        message: `Please, Insert a valid Email`
-    }
+    validate: {
+      validator: (value) => validator.isEmail(value),
+      message: `Please, Insert a valid Email`,
+    },
   },
 
-  password:{
-    type:String,
+  password: {
+    type: String,
     require: true,
     unique: false,
     minlength: 6,
     maxlength: 15,
-    match:[
-        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-        `Please, Insert a valid Password`
-    ]
+    match: [
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+      `Please, Insert a valid Password`,
+    ],
   },
-  status:{
-      type: Boolean,
-      unique:false,
-      require: true,
-      default: true,
-      enum:[true, false]
-  },
-  user_course:{
-    type: Schema.Types.ObjectId,
-    ref:"Course",
+  img: {
+    type: String,
+    unique: false,
     require: false,
   },
-  user_reviews:{
+  status: {
+    type: Boolean,
+    unique: false,
+    require: true,
+    default: true,
+    enum: [true, false],
+  },
+  user_course: {
+    type: Schema.Types.ObjectId,
+    ref: "Course",
+    require: false,
+  },
+  user_reviews: {
     type: Schema.Types.ObjectId,
     ref: "Reviews",
     require: false,
   },
-  user_payment:{
+  user_payment: {
     type: Schema.Types.ObjectId,
     ref: "Payment",
-    require: false
-  }
-
+    require: false,
+  },
 });
+
+UserSchema.methods.encrypPassword = async (password) => {
+  const salt = await bcrypt.genSalt(10);
+  return await bcrypt.hash(password, salt);
+}
+
+UserSchema.methods.matchPassword = async function(candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
 
 module.exports = model("User", UserSchema);
