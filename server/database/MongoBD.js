@@ -1,10 +1,9 @@
 require(`dotenv`).config();
 const mongoose = require(`mongoose`);
 
-const localhost = process.env.BD_HOST;
-const dbName = process.env.BD_NAME;
+const { BD_HOST, BD_NAME} = process.env;
 
-mongoose.connect(`mongodb://${localhost}/${dbName}`)
+mongoose.connect(`mongodb://${BD_HOST}/${BD_NAME}`)
 .then(() => {
     console.log(`Database is connected`)
 })
