@@ -1,12 +1,15 @@
-require(`dotenv`).config();
-const mongoose = require(`mongoose`);
+require('dotenv').config();
+const mongoose = require('mongoose');
 
-const { BD_HOST, BD_NAME} = process.env;
+const DB_NAME = process.env.DB_ATLAS_NAME;
+const DB_PASSWORD = process.env.DB_ATLAS_PASSWORD;
+const uri_db = `mongodb+srv://${DB_NAME}:${DB_PASSWORD}@cluster0.d8q7u1u.mongodb.net/?retryWrites=true&w=majority`;
 
-mongoose.connect(`mongodb://${BD_HOST}/${BD_NAME}`)
-.then(() => {
-    console.log(`Database is connected`)
-})
-.catch((error) =>{
-    console.log(`Error to connect to database`, error);
-})
+mongoose.connect(uri_db)
+  .then(() => {
+    console.log('La base de datos está conectada');
+  })
+  .catch(error => {
+    console.error('Error al conectar a la base de datos:', error.message);
+  });
+
