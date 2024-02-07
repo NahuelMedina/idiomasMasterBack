@@ -12,7 +12,7 @@ const CourseSchema = new Schema({
     type: String,
     require: true,
     unique: false,
-    enum: ["Beginer", "Intermediate", "Advanced"],
+    enum: ["Beginner", "Intermediate", "Advanced"],
   },
 
   price: {
@@ -59,7 +59,7 @@ const CourseSchema = new Schema({
 
   image: {
     type: String,
-    require: true,
+    require: false,
     unique: false,
   },
   status: {
@@ -69,11 +69,11 @@ const CourseSchema = new Schema({
     default: true,
     enum: [true, false],
   },
-  student_course: {
+  students: [{
     type: Schema.Types.ObjectId,
     ref: "User",
-    require: true,
-  },
+    required: true
+  }],
 
   review_course: {
     type: Schema.Types.ObjectId,

@@ -19,7 +19,9 @@ const deleteUser = require("./handlers/deleteUser")
 const putReview = require("./handlers/putReview")
 const putUser = require("./handlers/putUser")
 const putPayment = require("./handlers/putPayment")
-const putCourse = require("./handlers/putCourse")
+const putCourse = require("./handlers/putCourse");
+const AddUserCourse = require('./handlers/addUserCourse');
+const deleteUserCourse = require('./handlers/deteleUserCourse');
 const routes = Router()
 
 routes.post("/createUser", createUser);
@@ -43,6 +45,8 @@ routes.put("/putReview/:id", putReview)
 routes.put("/putUser/:id", putUser)
 routes.put("/putCourse/:id", putCourse)
 routes.put("/putPayment/:id", putPayment)
+routes.put("/addUserCourse", AddUserCourse)
+routes.put("/deleteUserCourse", deleteUserCourse);
 
 
 module.exports = routes;

@@ -2,12 +2,16 @@ const Course = require("../.././database/models/Course");
 
 const createCourse = async (req, res) => {
   try {
-    const { language, level, price, duration, schedule} = req.body;
+    const { language, level, price, duration, start_time, finish_time, location, image, schedule} = req.body;
     const newCourse = new Course({
       language,
       level,
       price,
       duration,
+      start_time,
+      finish_time,
+      location,
+      image,
       schedule,
     });
     if (newCourse) {
