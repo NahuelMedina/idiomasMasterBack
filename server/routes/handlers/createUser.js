@@ -1,4 +1,5 @@
 const User = require("../../database/models/User");
+const {cloudinary} = require("../../utils/cloudinary")
 
 const createUser = async (req, res) => {
 
@@ -6,7 +7,20 @@ const createUser = async (req, res) => {
 
     const {name, lastname, age, email, password, img } = req.body;
 
-    const newUser = new User({name, lastname, age, email, password, img});
+    let imageUrl;
+
+    if(img){
+
+        const userImage = img.data
+
+        const uploadedImage  = await cloudinary.uploader.upload(userImage, {
+         upload_preset: "ml_default"
+        })
+
+        imageUrl = uploadedImage.url;
+    }
+
+    const newUser = new User({name, lastname, age, email, password, img: imageUrl});
 
     const existUser = await User.findOne({email});
 

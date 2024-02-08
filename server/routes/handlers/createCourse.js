@@ -1,8 +1,17 @@
 const Course = require("../.././database/models/Course");
+const {cloudinary} = require("../../utils/cloudinary")
 
 const createCourse = async (req, res) => {
   try {
     const { language, level, price, duration, start_time, finish_time, location, image, schedule} = req.body;
+
+    const courseImage = image.data
+
+     const uploadedImage  = await cloudinary.uploader.upload(courseImage, {
+      upload_preset: "ml_default"
+     })
+
+
     const newCourse = new Course({
       language,
       level,
@@ -11,7 +20,7 @@ const createCourse = async (req, res) => {
       start_time,
       finish_time,
       location,
-      image,
+      image : uploadedImage.url,
       schedule,
     });
     if (newCourse) {
