@@ -1,4 +1,5 @@
 const Course = require("../.././database/models/Course");
+const {cloudinary} = require("../../utils/cloudinary")
 
 const putCourse = async (req, res) => {
     try {
@@ -45,7 +46,13 @@ const putCourse = async (req, res) => {
     }
 
     if (image) {
-      course.image = image;
+      const userImage = image.data
+
+      const uploadedImage  = await cloudinary.uploader.upload(userImage, {
+       upload_preset: "ml_default"
+      })
+ 
+      course.image = uploadedImage.url
     }
 
     if (status !== undefined) {

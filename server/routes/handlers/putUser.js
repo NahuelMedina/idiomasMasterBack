@@ -1,4 +1,5 @@
 const User = require("../.././database/models/User");
+const {cloudinary} = require("../../utils/cloudinary")
 
 const putUser = async (req, res) => {
   try {
@@ -27,7 +28,15 @@ const putUser = async (req, res) => {
     }
 
     if (img) {
-      user.img = img;
+
+     const userImage = img.data
+
+     const uploadedImage  = await cloudinary.uploader.upload(userImage, {
+      upload_preset: "ml_default"
+     })
+
+     user.img = uploadedImage.url
+
     }
 
     if (age) {
