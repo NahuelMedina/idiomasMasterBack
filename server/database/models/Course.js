@@ -20,7 +20,7 @@ const CourseSchema = new Schema({
     require: true,
     unique: false,
     min: 25,
-    max: 300,
+    max: 500,
   },
 
   duration: {
