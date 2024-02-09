@@ -5,15 +5,12 @@ const createUser = async (req, res) => {
   try {
     const { name, lastname, age, email, password, img } = req.body;
 
-    let imageUrl;
+    let imageUrl = "";
 
-    if (img) {
-      const userImage = img.data;
-
-      const uploadedImage = await cloudinary.uploader.upload(userImage, {
+    if (typeof img === "object" && img.data) {
+      const uploadedImage = await cloudinary.uploader.upload(img.data, {
         upload_preset: "ml_default",
       });
-
       imageUrl = uploadedImage.url;
     }
 
@@ -29,7 +26,7 @@ const createUser = async (req, res) => {
     const existUser = await User.findOne({ email });
 
     if (existUser) {
-      return res.status(400).send("Email is alredy in User");
+      return res.status(400).send("Email is already in use");
     }
 
     await newUser.save();
