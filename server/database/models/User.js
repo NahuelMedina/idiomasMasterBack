@@ -34,7 +34,7 @@ const UserSchema = new Schema({
     lowcase: true,
     validate: {
       validator: (value) => validator.isEmail(value),
-      message: `Please, Insert a valid Email`,
+      message: `Por favor, inserte un Email válido`,
     },
   },
 
@@ -46,7 +46,7 @@ const UserSchema = new Schema({
     maxlength: 15,
     match: [
       /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-      `Please, Insert a valid Password`,
+      `Por favor, inserte una contraseña válida`,
     ],
   },
   img: {
