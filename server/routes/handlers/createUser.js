@@ -1,42 +1,33 @@
 const User = require("../../database/models/User");
-const {cloudinary} = require("../../utils/cloudinary")
+const { cloudinary } = require("../../utils/cloudinary");
 
 const createUser = async (req, res) => {
+    try {
+        const { name, lastname, age, email, password, img } = req.body;
 
-    try{
+        let imageUrl = "";
 
-    const {name, lastname, age, email, password, img } = req.body;
+        if (typeof img === "object" && img.data) {
+            const uploadedImage = await cloudinary.uploader.upload(img.data, {
+                upload_preset: "ml_default"
+            });
+            imageUrl = uploadedImage.url;
+        }
 
-    let imageUrl;
+        const newUser = new User({ name, lastname, age, email, password, img: imageUrl });
 
-    if(img){
+        const existUser = await User.findOne({ email });
 
-        const userImage = img.data
+        if (existUser) {
+            return res.status(400).send("Email is already in use");
+        }
 
-        const uploadedImage  = await cloudinary.uploader.upload(userImage, {
-         upload_preset: "ml_default"
-        })
+        await newUser.save();
 
-        imageUrl = uploadedImage.url;
-    }
-
-    const newUser = new User({name, lastname, age, email, password, img: imageUrl});
-
-    const existUser = await User.findOne({email});
-
-    if(existUser){
-        return res.status(400).send("Email is alredy in User")
-    }
-
-    await newUser.save();
-
-    return res.status(200).send(`User created: ${name} ${lastname}`)
-
-
-    }catch(error){
-
+        return res.status(200).send(`User created: ${name} ${lastname}`);
+    } catch (error) {
         return res.status(500).send(error.message);
     }
-}
+};
 
-module.exports = createUser; 
+module.exports = createUser;
