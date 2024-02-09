@@ -54,7 +54,7 @@ const UserSchema = new Schema({
     unique: false,
     require: false,
   },
-  
+
   status: {
     type: Boolean,
     unique: false,
@@ -82,9 +82,9 @@ const UserSchema = new Schema({
 UserSchema.methods.encrypPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
-}
+};
 
-UserSchema.methods.matchPassword = async function(candidatePassword) {
+UserSchema.methods.matchPassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
 
