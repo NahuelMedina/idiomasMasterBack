@@ -16,7 +16,6 @@ const createCourse = async (req, res) => {
       console.log("imagen subida a cloudinary con exito:", uploadedImage);
       imageUrl = uploadedImage.url;
     }
-
     console.log("URL de la imagen:", imageUrl);
 
     const newCourse = new Course({
