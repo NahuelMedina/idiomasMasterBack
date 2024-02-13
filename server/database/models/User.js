@@ -34,7 +34,7 @@ const UserSchema = new Schema({
     lowcase: true,
     validate: {
       validator: (value) => validator.isEmail(value),
-      message: `Please, Insert a valid Email`,
+      message: `Por favor, inserte un Email válido`,
     },
   },
 
@@ -46,7 +46,7 @@ const UserSchema = new Schema({
     maxlength: 15,
     match: [
       /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-      `Please, Insert a valid Password`,
+      `Por favor, inserte una contraseña válida`,
     ],
   },
   img: {
@@ -54,7 +54,7 @@ const UserSchema = new Schema({
     unique: false,
     require: false,
   },
-  
+
   status: {
     type: Boolean,
     unique: false,
@@ -82,9 +82,9 @@ const UserSchema = new Schema({
 UserSchema.methods.encrypPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
-}
+};
 
-UserSchema.methods.matchPassword = async function(candidatePassword) {
+UserSchema.methods.matchPassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
 

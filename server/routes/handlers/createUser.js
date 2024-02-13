@@ -18,6 +18,7 @@ const createUser = async (req, res) => {
       imageUrl = uploadedImage.url;
     }
 
+
     const existUser = await User.findOne({ email });
 
     if (existUser) {
@@ -53,6 +54,7 @@ const createUser = async (req, res) => {
     if (!response) {
       return res.status(400).send("Welcome Email cannot been delivered");
     }
+
 
     return res.status(200).send(`User created: ${name} ${lastname}`);
   } catch (error) {
