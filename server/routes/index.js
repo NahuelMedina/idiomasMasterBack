@@ -25,6 +25,7 @@ const deleteUserCourse = require('./handlers/deteleUserCourse');
 const getAllCourses = require('./handlers/getAllCourse');
 const getCourseFilters = require('./handlers/getCourseFilters');
 
+
 const routes = Router()
 
 routes.post("/createUser", createUser);
@@ -52,6 +53,7 @@ routes.put("/addUserCourse", AddUserCourse)
 routes.put("/deleteUserCourse", deleteUserCourse);
 routes.get("/getAllCourses", getAllCourses)
 routes.get("/getCourseFilters", getCourseFilters)
+
 
 
 
