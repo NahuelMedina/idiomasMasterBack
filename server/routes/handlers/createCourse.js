@@ -4,15 +4,19 @@ const { cloudinary } = require("../../utils/cloudinary");
 const createCourse = async (req, res) => {
   try {
     const { language, level, price, duration, start_time, finish_time, location, image, schedule } = req.body;
-
+    
     let imageUrl = "";
 
-    if (typeof image === "object" && image.data) {
-      const uploadedImage = await cloudinary.uploader.upload(image.data, {
-        upload_preset: "ml_default"
+    if (image) {
+      console.log("subiendo imagen a cloudinary");
+      const uploadedImage = await cloudinary.uploader.upload(image, {
+        upload_preset: "ml_default",
+        folder: "idiomasMaster" // carpeta que se crea en cloudinary
       });
+      console.log("imagen subida a cloudinary con exito:", uploadedImage);
       imageUrl = uploadedImage.url;
     }
+    console.log("URL de la imagen:", imageUrl);
 
     const newCourse = new Course({
       language,
@@ -26,10 +30,14 @@ const createCourse = async (req, res) => {
       schedule,
     });
 
+    console.log("Nuevo curso a guardar en la base de datos:", newCourse);
+
     await newCourse.save();
     
+    console.log("Curso guardado exitosamente en la base de datos.");
     return res.status(200).send(`Course created: ${language}`);
   } catch (error) {
+    console.error("Error al crear el curso:", error);
     return res.status(500).send(error.message);
   }
 };
