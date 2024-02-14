@@ -3,7 +3,7 @@ const { MercadoPagoConfig, Preference } = require('mercadopago');
 const YOUR_ACCESS_TOKEN = process.env.YOUR_ACCESS_TOKEN;
 
 
-const client = new MercadoPagoConfig({ accessToken: 'TEST-7877355488208454-021311-c98f95913f7a3b851d728e816e919f58-1679733305' });
+const client = new MercadoPagoConfig({ accessToken: YOUR_ACCESS_TOKEN });
 
 
 const createPreference = async (req, res) => {
@@ -11,10 +11,15 @@ const createPreference = async (req, res) => {
         const body = {
             items: [
                 {
-                    title: req.body.description,
+                    // title: "computadora",
+                    // unit_price: 200,
+                    // currency_id: "COL",
+                    // description: "portatil",
+                    // quantity:1,
+                    title: req.body.id,
                     quantity: Number(req.body.quantity),
                     unit_price: Number(req.body.price),
-                    currency_id: "COL",
+                    currency_id: "USD",
                 },
             ],
             back_urls: {
@@ -28,7 +33,7 @@ const createPreference = async (req, res) => {
         const preference = new Preference(client);
         const result = await preference.create({ body });
         res.json({
-            id: result.id,
+            url: result.init_point,
         })
 
     } catch (error) {
