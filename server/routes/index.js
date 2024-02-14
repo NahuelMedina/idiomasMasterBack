@@ -24,6 +24,8 @@ const AddUserCourse = require("./handlers/addUserCourse");
 const deleteUserCourse = require("./handlers/deteleUserCourse");
 const getAllCourses = require("./handlers/getAllCourse");
 const getCourseFilters = require("./handlers/getCourseFilters");
+const createPreference = require('./handlers/Payments/postPayments')
+
 
 const routes = Router();
 
@@ -53,6 +55,8 @@ routes.put("/addUserCourse", AddUserCourse);
 routes.put("/deleteUserCourse", deleteUserCourse);
 routes.get("/getAllCourses", getAllCourses);
 routes.get("/getCourseFilters", getCourseFilters);
+routes.post("/createPreference", createPreference);
+
 
 
 module.exports = routes;
