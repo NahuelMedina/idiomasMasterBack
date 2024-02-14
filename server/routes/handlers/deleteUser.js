@@ -1,4 +1,8 @@
 const User = require('../.././database/models/User');
+const transporter = require("../../nodemailer")
+require("dotenv").config();
+const fs = require("fs");
+const path = require("path");
 
 const deletUser = async (req, res) => {
     try {
@@ -13,6 +17,25 @@ const deletUser = async (req, res) => {
         user.status = false;
 
         await user.save();
+
+        const contenidoHTML = fs.readFileSync(
+            path.join(__dirname, "../mail/noUserTemplate.html"),
+            "utf-8"
+          );
+      
+          const response = await transporter.sendMail({
+            from: {
+              name: "Idiomas Master Admin",
+              address: process.env.MAIL_USER,
+            },
+            to: user.email, 
+            subject: "Cuenta desactivada Exitosamente", 
+            html: contenidoHTML, 
+          });
+
+          if (!response) {
+            return res.status(400).send("Welcome Email cannot been delivered");
+          }
 
         return res.status(200).json({ message: 'User has been deleted successfully.' });
     } catch (error) {

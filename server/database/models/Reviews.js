@@ -16,6 +16,21 @@ const ReviewSchema = new Schema({
     minlength: 15,
     maxlength: 300,
   },
+  reply: {
+    type: String,
+    require: false,
+    unique: false,
+    minlength: 15,
+    maxlength: 300,
+  },
+
+  view: {
+    type: Boolean,
+    unique: false,
+    require: true,
+    default: false,
+    enum: [true, false],
+  },
 
   student_review: {
     type: Schema.Types.ObjectId,
