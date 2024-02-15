@@ -59,6 +59,9 @@ routes.put("/putPayment", putPayment);
 routes.put("/addUserCourse", AddUserCourse);
 routes.put("/deleteUserCourse", deleteUserCourse);
 routes.get("/getAllCourses", getAllCourses);
+routes.get("/getAllUsers", getAllUsers);
+routes.get("/getAllPayments", getAllPayments);
+routes.get("/getAllReviews", getAllReviews);
 routes.get("/getCourseFilters", getCourseFilters);
 routes.post("/createPreference", createPreference);
 
