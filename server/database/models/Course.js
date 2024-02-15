@@ -27,7 +27,7 @@ const CourseSchema = new Schema({
     type: String,
     requiere: true,
     unique: false,
-    enum: ["1 Month" , "2 Months", "3 Months", "4 Months"],
+    enum: ["1 Month", "2 Months", "3 Months", "4 Months"],
   },
 
   schedule: {
@@ -35,7 +35,10 @@ const CourseSchema = new Schema({
     require: true,
     unique: false,
     enum: [
-      "On Weekends", "During the week", "Monday-Wednesday-Friday", "Tuesday-Thursday",
+      "On Weekends",
+      "During the week",
+      "Monday-Wednesday-Friday",
+      "Tuesday-Thursday",
     ],
   },
 
@@ -56,6 +59,12 @@ const CourseSchema = new Schema({
     require: true,
     unique: false,
   },
+  rank: {
+    type: Number,
+    unique: false,
+    require: false,
+    enum: [1, 2, 3, 4, 5],
+  },
 
   image: {
     type: String,
@@ -69,17 +78,22 @@ const CourseSchema = new Schema({
     default: true,
     enum: [true, false],
   },
-  students: [{
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true
-  }],
 
-  review_course: {
-    type: Schema.Types.ObjectId,
-    ref: "Review",
-    require: true,
-  },
+  students: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+  ],
+
+  review_course: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+      require: true,
+    },
+  ],
 });
 
 module.exports = model("Course", CourseSchema);
