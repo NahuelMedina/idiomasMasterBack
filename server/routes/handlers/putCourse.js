@@ -1,8 +1,8 @@
 const Course = require("../.././database/models/Course");
-const {cloudinary} = require("../../utils/cloudinary")
+const { cloudinary } = require("../../utils/cloudinary");
 
 const putCourse = async (req, res) => {
-    try {
+  try {
     const {
       id,
       language,
@@ -12,7 +12,9 @@ const putCourse = async (req, res) => {
       schedule,
       location,
       image,
-      status
+      status,
+      start_time,
+      finish_time,
     } = req.body;
 
     const course = await Course.findById(id);
@@ -21,41 +23,50 @@ const putCourse = async (req, res) => {
       return res.status(404).send("Course not found");
     }
 
-    if (language) {
+    if (language && course.language !== language) {
       course.language = language;
     }
 
-    if (level) {
+    if (level && course.level !== level) {
       course.level = level;
     }
 
-    if (price) {
+    if (price && course.price !== price) {
       course.price = price;
     }
 
-    if (duration) {
+    if (duration && course.duration !== duration) {
       course.duration = duration;
     }
 
-    if (schedule) {
-      course.schedule = schedule;
+    if (start_time && course.start_time !== start_time) {
+      course.start_time = start_time;
     }
 
-    if (location) {
+    if (finish_time&& course.finish_time !== finish_time) {
+      course.finish_time = finish_time;
+    }
+
+
+    if (location && course.location !== location) {
       course.location = location;
     }
 
-    if (image) {
-      const userImage = image.data
-
-      const uploadedImage  = await cloudinary.uploader.upload(userImage, {
-       upload_preset: "ml_default"
-      })
- 
-      course.image = uploadedImage.url
+    if (schedule && course.schedule !== schedule) {
+      course.location = schedule;
     }
 
-    if (status !== undefined) {
+    let imageUrl = "";
+
+    if (typeof image === "object" && image.data) {
+      const uploadedImage = await cloudinary.uploader.upload(img.data, {
+        upload_preset: "ml_default",
+      });
+      course.image = uploadedImage.url;
+    }
+
+
+    if (status !== undefined && course.status !== status) {
       course.status = status;
     }
 
