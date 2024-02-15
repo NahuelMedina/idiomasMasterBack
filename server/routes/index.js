@@ -24,11 +24,19 @@ const AddUserCourse = require("./handlers/addUserCourse");
 const deleteUserCourse = require("./handlers/deteleUserCourse");
 const getAllCourses = require("./handlers/getAllCourse");
 const getCourseFilters = require("./handlers/getCourseFilters");
+<<<<<<< HEAD
+const getAllUsers = require("./handlers/getAllUsers");
+const getAllPayments = require("./handlers/getAllPayments");
+const getAllReviews = require("./handlers/getAllReviews");
+
+const routes = Router();
+=======
 const createPreference = require('./handlers/Payments/postPayments')
 
 
 const routes = Router();
 
+>>>>>>> cf7da1a9d7b4ac94c7928182fb64a1f1afcd35ea
 
 routes.post("/createUser", createUser);
 routes.post("/createCourse", createCourse);
@@ -55,9 +63,17 @@ routes.put("/addUserCourse", AddUserCourse);
 routes.put("/deleteUserCourse", deleteUserCourse);
 routes.get("/getAllCourses", getAllCourses);
 routes.get("/getCourseFilters", getCourseFilters);
+<<<<<<< HEAD
+routes.get("/getAllUsers", getAllUsers);
+routes.get("/getAllPayments", getAllPayments);
+routes.get("/getAllReviews", getAllReviews);
+
+module.exports = routes;
+=======
 routes.post("/createPreference", createPreference);
 
 
 
 module.exports = routes;
 
+>>>>>>> cf7da1a9d7b4ac94c7928182fb64a1f1afcd35ea
