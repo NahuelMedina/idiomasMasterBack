@@ -8,7 +8,8 @@ const path = require("path");
 
 const putUser = async (req, res) => {
   try {
-    const { name, lastname, password, email, img, age, id } = req.body;
+    const { name, lastname, password, email, img, age, id, profile, status } = req.body;
+
 
     const user = await User.findById(id);
 
@@ -16,23 +17,25 @@ const putUser = async (req, res) => {
       return res.status(404).send("User not found");
     }
 
-    if (name) {
+    if (name && name !== user.name) {
       user.name = name;
     }
 
-    if (lastname) {
+    if (lastname && lastname !== user.lastname) {
       user.lastname = lastname;
     }
 
-    if (password) {
+    if (password && password !== user.password && password.length > 5) {
       user.password = password; 
     }
 
-    if (email) {
+    if (email && email !== user.email) {
       user.email = email;
     }
 
-    if (img) {
+
+
+    if (typeof img === "object" && img.data) {
 
      const userImage = img.data
 
@@ -44,8 +47,21 @@ const putUser = async (req, res) => {
 
     }
 
-    if (age) {
+
+
+    if (age && age !== user.age) {
       user.age = age;
+    }
+
+
+   
+
+    if(profile && profile !== user.profile){
+      user.profile = profile;
+    }
+
+    if (status !== undefined && user.status !== status) {
+      user.status = status;
     }
 
     await user.save();
