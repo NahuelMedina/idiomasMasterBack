@@ -40,7 +40,7 @@ const UserSchema = new Schema({
 
   password: {
     type: String,
-    require: true,
+    require: false,
     unique: false,
     minlength: 6,
     maxlength: 15,
@@ -58,7 +58,7 @@ const UserSchema = new Schema({
   status: {
     type: Boolean,
     unique: false,
-    require: true,
+    require: false,
     default: true,
     enum: [true, false],
   },
