@@ -2,7 +2,7 @@ const Reviews = require("../.././database/models/Reviews");
 
 const putReview = async (req, res) => {
   try {
-    const { rating, body, reviewId } = req.body;
+    const { rating, body, reviewId, reply, view } = req.body;
 
     const review = await Reviews.findById(reviewId);
 
@@ -13,6 +13,18 @@ const putReview = async (req, res) => {
     if (body) {
       review.body = body;
     }
+
+    console.log(reply)
+
+    if (reply) {
+      review.reply = reply;
+    }
+
+    if (view !== undefined && review.view !== view) {
+      review.view = view;
+    }
+
+    
 
     await review.save();
 
