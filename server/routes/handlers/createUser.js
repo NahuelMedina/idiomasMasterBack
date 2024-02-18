@@ -21,7 +21,7 @@ const createUser = async (req, res) => {
     const existUser = await User.findOne({ email });
 
     if (existUser) {
-      return res.status(400).send();
+      return res.status(400).send('El email ya está en uso.');
     }
 
     const newUser = new User({

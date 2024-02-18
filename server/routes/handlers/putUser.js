@@ -9,6 +9,7 @@ const putUser = async (req, res) => {
   try {
     const { name, lastname, password, email, img, age, id, profile, status } = req.body;
 
+    console.log("Datos recibidos:", req.body);
 
     const user = await User.findById(id);
 
@@ -32,28 +33,12 @@ const putUser = async (req, res) => {
       user.email = email;
     }
 
-
-
     if (typeof img === "object" && img.data) {
-
-     const userImage = img.data
-
-     const uploadedImage  = await cloudinary.uploader.upload(userImage, {
-      upload_preset: "ml_default"
-     })
-
-     user.img = uploadedImage.url
-
+      const uploadedImage = await cloudinary.uploader.upload(img.data, {
+        upload_preset: "ml_default",
+      });
+      user.img = uploadedImage.url;
     }
-
-
-
-    if (age && age !== user.age) {
-      user.age = age;
-    }
-
-
-   
 
     if(profile && profile !== user.profile){
       user.profile = profile;

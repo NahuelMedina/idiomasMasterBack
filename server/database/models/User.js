@@ -87,7 +87,10 @@ const UserSchema = new Schema(
     type: Schema.Types.ObjectId,
     ref: "Payment",
     require: false,
+   },
   },
+  {
+    timestamps: true,
 });
 
 UserSchema.methods.encrypPassword = async (password) => {
