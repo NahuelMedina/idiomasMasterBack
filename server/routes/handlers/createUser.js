@@ -18,6 +18,7 @@ const createUser = async (req, res) => {
       });
       imageUrl = uploadedImage.url;
     }
+    
     const existUser = await User.findOne({ email });
 
     if (existUser) {

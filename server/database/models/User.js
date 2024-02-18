@@ -94,8 +94,8 @@ const UserSchema = new Schema({
     ref: "Payment",
     require: false,
    },
+   
   },
-  
   {
     timestamps: true,
 });
