@@ -8,7 +8,7 @@ const PaymentSchema = new Schema({
   },
 
   date: {
-    type: Date,
+    type: String,
     require: true,
     unique: false,
   },
@@ -27,7 +27,7 @@ const PaymentSchema = new Schema({
     default: false,
     enum: [true, false],
   },
-  
+
   student_payment: {
     type: Schema.Types.ObjectId,
     ref: "User",

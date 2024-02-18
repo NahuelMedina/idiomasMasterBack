@@ -24,25 +24,16 @@ const AddUserCourse = require("./handlers/addUserCourse");
 const deleteUserCourse = require("./handlers/deteleUserCourse");
 const getAllCourses = require("./handlers/getAllCourse");
 const getCourseFilters = require("./handlers/getCourseFilters");
-<<<<<<< HEAD
-const getAllUsers = require("./handlers/getAllUsers");
+const createPreference = require("./handlers/Payments/postPayments");
 const getAllPayments = require("./handlers/getAllPayments");
-const getAllReviews = require("./handlers/getAllReviews");
-
 const routes = Router();
-=======
-const createPreference = require('./handlers/Payments/postPayments')
-
-
-const routes = Router();
-
->>>>>>> cf7da1a9d7b4ac94c7928182fb64a1f1afcd35ea
 
 routes.post("/createUser", createUser);
 routes.post("/createCourse", createCourse);
 routes.post("/createReview", createReview);
 routes.post("/createPayment", createPayment);
 routes.post("/getUser", getUser);
+routes.post("/createPreference", createPreference);
 routes.get("/getReviews/:id", getReviews);
 routes.get("/getUserReviews/:id", getUserReviews);
 routes.get("/getCourseReviews/:id", getCourseReviews);
@@ -50,6 +41,7 @@ routes.get("/getCourse/name", getCourseByName);
 routes.get("/getCourse/:id", getCourseByID);
 routes.get("/getUserCourses/:id", getUserCourses);
 routes.get("/getPayment/:id", getPaymentById);
+routes.get("/getAllPayments", getAllPayments);
 routes.get("/getUserPayment/:id", getPaymentUser);
 routes.get("/getCoursePayment/:id", getPaymentCourse);
 routes.delete("/deleteReview/:id", deleteReview);
@@ -62,18 +54,7 @@ routes.put("/putPayment", putPayment);
 routes.put("/addUserCourse", AddUserCourse);
 routes.put("/deleteUserCourse", deleteUserCourse);
 routes.get("/getAllCourses", getAllCourses);
+
 routes.get("/getCourseFilters", getCourseFilters);
-<<<<<<< HEAD
-routes.get("/getAllUsers", getAllUsers);
-routes.get("/getAllPayments", getAllPayments);
-routes.get("/getAllReviews", getAllReviews);
 
 module.exports = routes;
-=======
-routes.post("/createPreference", createPreference);
-
-
-
-module.exports = routes;
-
->>>>>>> cf7da1a9d7b4ac94c7928182fb64a1f1afcd35ea
