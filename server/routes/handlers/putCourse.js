@@ -56,8 +56,6 @@ const putCourse = async (req, res) => {
       course.location = schedule;
     }
 
-    let imageUrl = "";
-
     if (typeof image === "object" && image.data) {
       const uploadedImage = await cloudinary.uploader.upload(img.data, {
         upload_preset: "ml_default",

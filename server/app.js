@@ -3,7 +3,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
-const cors = require ('cors')
+const path = require('path'); // Agrega esta línea para manejar rutas de archivos estáticos
+const cors = require('cors');
 
 require('./database/MongoBD.js');
 
@@ -22,10 +23,14 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
-server.use(morgan("dev"));
+server.use(morgan('dev'));
 server.use(express.json());
+
+// Configuración del middleware para servir archivos estáticos (necesario para el enrutamiento del lado del cliente)
+server.use(express.static(path.join(__dirname, 'public')));
+
 server.use('/', routes);
-server.use(cors())
+server.use(cors());
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
