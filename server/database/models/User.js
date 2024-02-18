@@ -2,41 +2,42 @@ const { Schema, model } = require(`mongoose`);
 const validator = require(`validator`);
 const bcrypt = require("bcryptjs");
 
-const UserSchema = new Schema({
-  name: {
-    type: String,
-    require: false,
-    unique: false,
-    minlength: 3,
-    maxlength: 30,
-  },
-
-  lastname: {
-    type: String,
-    require: false,
-    unique: false,
-    minlength: 3,
-    maxlength: 30,
-  },
-
-  age: {
-    type: Number,
-    require: false,
-    unique: false,
-    min: 8,
-    max: 99,
-  },
-
-  email: {
-    type: String,
-    require: true,
-    unique: true,
-    lowcase: true,
-    validate: {
-      validator: (value) => validator.isEmail(value),
-      message: `Por favor, inserte un Email válido`,
+const UserSchema = new Schema(
+  {
+    name: {
+      type: String,
+      require: false,
+      unique: false,
+      minlength: 3,
+      maxlength: 30,
     },
-  },
+
+    lastname: {
+      type: String,
+      require: false,
+      unique: false,
+      minlength: 3,
+      maxlength: 30,
+    },
+
+    age: {
+      type: Number,
+      require: false,
+      unique: false,
+      min: 8,
+      max: 99,
+    },
+
+    email: {
+      type: String,
+      require: true,
+      unique: true,
+      lowcase: true,
+      validate: {
+        validator: (value) => validator.isEmail(value),
+        message: `Por favor, inserte un Email válido`,
+      },
+    },
 
   password: {
     type: String,
