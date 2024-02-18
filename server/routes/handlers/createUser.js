@@ -54,7 +54,6 @@ const createUser = async (req, res) => {
       return res.status(400).send("Welcome Email cannot been delivered");
     }
 
-
     return res.status(200).send(`User created: ${name} ${lastname}`);
   } catch (error) {
     return res.status(500).send(error.message);

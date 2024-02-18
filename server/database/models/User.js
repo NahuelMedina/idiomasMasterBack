@@ -89,6 +89,7 @@ const UserSchema = new Schema(
     require: false,
    },
   },
+  
   {
     timestamps: true,
 });
