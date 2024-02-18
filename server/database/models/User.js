@@ -49,6 +49,7 @@ const UserSchema = new Schema({
       `Por favor, inserte una contraseña válida`,
     ],
   },
+  
   img: {
     type: String,
     unique: false,
