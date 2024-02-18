@@ -4,7 +4,7 @@ const getUserCourses = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const course = await Course.find({ student_course: id });
+    const course = await Course.find({ students: id });
 
     return res.status(200).json(course);
   } catch (error) {

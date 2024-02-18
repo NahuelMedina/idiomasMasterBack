@@ -40,7 +40,7 @@ const UserSchema = new Schema({
 
   password: {
     type: String,
-    require: true,
+    require: false,
     unique: false,
     minlength: 6,
     maxlength: 15,
@@ -58,10 +58,19 @@ const UserSchema = new Schema({
   status: {
     type: Boolean,
     unique: false,
-    require: true,
+    require: false,
     default: true,
     enum: [true, false],
   },
+
+  profile: {
+    type: String,
+    unique: false,
+    require: true,
+    default: "user",
+    enum: ["user", "admin"],
+  },
+  
   user_course: {
     type: Schema.Types.ObjectId,
     ref: "Course",
@@ -77,7 +86,12 @@ const UserSchema = new Schema({
     ref: "Payment",
     require: false,
   },
-});
+  },
+  {
+    timestamps: true,
+  }
+);
+
 
 UserSchema.methods.encrypPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);

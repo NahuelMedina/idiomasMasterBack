@@ -24,9 +24,15 @@ const AddUserCourse = require("./handlers/addUserCourse");
 const deleteUserCourse = require("./handlers/deteleUserCourse");
 const getAllCourses = require("./handlers/getAllCourse");
 const getCourseFilters = require("./handlers/getCourseFilters");
-const createPreference = require("./handlers/Payments/postPayments");
+
+const getAllUsers = require("./handlers/getAllUsers");
 const getAllPayments = require("./handlers/getAllPayments");
+const getAllReviews = require("./handlers/getAllReviews");
+
 const routes = Router();
+
+const createPreference = require("./handlers/Payments/postPayments");
+const getUserById = require("./handlers/getUserbyId");
 
 routes.post("/createUser", createUser);
 routes.post("/createCourse", createCourse);
@@ -41,7 +47,7 @@ routes.get("/getCourse/name", getCourseByName);
 routes.get("/getCourse/:id", getCourseByID);
 routes.get("/getUserCourses/:id", getUserCourses);
 routes.get("/getPayment/:id", getPaymentById);
-routes.get("/getAllPayments", getAllPayments);
+routes.get("/getUserbyId/:id", getUserById);
 routes.get("/getUserPayment/:id", getPaymentUser);
 routes.get("/getCoursePayment/:id", getPaymentCourse);
 routes.delete("/deleteReview/:id", deleteReview);
@@ -54,7 +60,10 @@ routes.put("/putPayment", putPayment);
 routes.put("/addUserCourse", AddUserCourse);
 routes.put("/deleteUserCourse", deleteUserCourse);
 routes.get("/getAllCourses", getAllCourses);
-
+routes.get("/getAllUsers", getAllUsers);
+routes.get("/getAllPayments", getAllPayments);
+routes.get("/getAllReviews", getAllReviews);
 routes.get("/getCourseFilters", getCourseFilters);
+routes.post("/createPreference", createPreference);
 
 module.exports = routes;
