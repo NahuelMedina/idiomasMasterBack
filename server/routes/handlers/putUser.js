@@ -1,14 +1,13 @@
 const User = require("../.././database/models/User");
-const {cloudinary} = require("../../utils/cloudinary")
-const transporter = require("../../nodemailer")
+const { cloudinary } = require("../../utils/cloudinary");
+const transporter = require("../../nodemailer");
 require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 
-
 const putUser = async (req, res) => {
   try {
-    const { name, lastname, password, email, img, age, id } = req.body;
+    const { id, name, lastname, password, email, img, age } = req.body;
 
     const user = await User.findById(id);
 
@@ -25,7 +24,7 @@ const putUser = async (req, res) => {
     }
 
     if (password) {
-      user.password = password; 
+      user.password = password;
     }
 
     if (email) {
@@ -33,15 +32,14 @@ const putUser = async (req, res) => {
     }
 
     if (img) {
+      const userImage = img.data;
 
-     const userImage = img.data
+      const uploadedImage = await cloudinary.uploader.upload(userImage, {
+        upload_preset: "ml_default",
+        folder: "idiomasMaster" // carpeta que se crea en cloudinary
+      });
 
-     const uploadedImage  = await cloudinary.uploader.upload(userImage, {
-      upload_preset: "ml_default"
-     })
-
-     user.img = uploadedImage.url
-
+      user.img = uploadedImage.url;
     }
 
     if (age) {
@@ -60,9 +58,9 @@ const putUser = async (req, res) => {
         name: "Idiomas Master Admin",
         address: process.env.MAIL_USER,
       },
-      to: user.email, 
-      subject: "Cuenta Actualizada Exitosamente", 
-      html: contenidoHTML, 
+      to: user.email,
+      subject: "Cuenta Actualizada Exitosamente",
+      html: contenidoHTML,
     });
 
     if (!response) {

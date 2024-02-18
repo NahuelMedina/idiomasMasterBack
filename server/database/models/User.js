@@ -62,6 +62,15 @@ const UserSchema = new Schema({
     default: true,
     enum: [true, false],
   },
+
+  profile: {
+    type: String,
+    unique: false,
+    require: true,
+    default: "user",
+    enum: ["user", "admin"],
+  },
+  
   user_course: {
     type: Schema.Types.ObjectId,
     ref: "Course",
