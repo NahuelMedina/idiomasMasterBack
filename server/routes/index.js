@@ -31,16 +31,15 @@ const getAllReviews = require("./handlers/getAllReviews");
 
 const routes = Router();
 
-const createPreference = require('./handlers/Payments/postPayments');
+const createPreference = require("./handlers/Payments/postPayments");
 const getUserById = require("./handlers/getUserbyId");
-
-
 
 routes.post("/createUser", createUser);
 routes.post("/createCourse", createCourse);
 routes.post("/createReview", createReview);
 routes.post("/createPayment", createPayment);
 routes.post("/getUser", getUser);
+routes.post("/createPreference", createPreference);
 routes.get("/getReviews/:id", getReviews);
 routes.get("/getUserReviews/:id", getUserReviews);
 routes.get("/getCourseReviews/:id", getCourseReviews);
@@ -67,7 +66,4 @@ routes.get("/getAllReviews", getAllReviews);
 routes.get("/getCourseFilters", getCourseFilters);
 routes.post("/createPreference", createPreference);
 
-
-
 module.exports = routes;
-
