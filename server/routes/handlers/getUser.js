@@ -3,6 +3,8 @@ const User = require("../.././database/models/User");
 const getUser = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(email)
+    console.log(password)
 
     const user = await User.findOne({ email });
     const passwordUser = await User.findOne({ password });

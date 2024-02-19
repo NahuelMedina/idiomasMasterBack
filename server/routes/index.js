@@ -33,12 +33,14 @@ const routes = Router();
 
 const createPreference = require("./handlers/Payments/postPayments");
 const getUserById = require("./handlers/getUserbyId");
+const getGoogleUser = require("./handlers/getGoogleUser");
 
 routes.post("/createUser", createUser);
 routes.post("/createCourse", createCourse);
 routes.post("/createReview", createReview);
 routes.post("/createPayment", createPayment);
 routes.post("/getUser", getUser);
+routes.post("/getGoogleUser", getGoogleUser);
 routes.post("/createPreference", createPreference);
 routes.get("/getReviews/:id", getReviews);
 routes.get("/getUserReviews/:id", getUserReviews);
