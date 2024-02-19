@@ -1,27 +1,31 @@
 const Payment = require("../.././database/models/Payment");
-const User = require("../.././database/models/User")
+const User = require("../.././database/models/User");
 const transporter = require("../../nodemailer");
 require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
+const getDataPayment = require("./getDataPayment");
 
 const createPayment = async (req, res) => {
   try {
-    const { Amount, date, status, user_id, course_id } = req.body;
+    const { data } = req.body;
+
+    const payment = await getDataPayment(data)
+
+    const { date_created, transaction_amount, status, payer, course_id } =
+      payment;
+    const user_id = await User.findOne({ email: payer.email });
     const newPayment = new Payment({
-      Amount,
-      date,
-      status,
+      Amount: transaction_amount,
+      date: date_created,
+      status: status,
       student_payment: user_id,
       course_payment: course_id,
     });
     if (newPayment) {
       const response = await newPayment.save();
 
-
       const idString = response._id.toString();
-
-      const user = await User.findById(user_id);
 
       const contenidoHTML = fs.readFileSync(
         path.join(__dirname, "../mail/purchaseTemplate.html"),
@@ -33,7 +37,7 @@ const createPayment = async (req, res) => {
           name: "Idiomas Master Admin",
           address: process.env.MAIL_USER,
         },
-        to: user.email,
+        to: user_id.email,
         subject: `Compra exitosa, Pago: ${idString}`,
         html: contenidoHTML,
       });

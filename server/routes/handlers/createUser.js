@@ -1,6 +1,6 @@
 const User = require("../../database/models/User");
 const { cloudinary } = require("../../utils/cloudinary");
-const transporter = require("../../nodemailer")
+const transporter = require("../../nodemailer");
 require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
@@ -18,7 +18,8 @@ const createUser = async (req, res) => {
       });
       imageUrl = uploadedImage.url;
     }
-    
+
+
     const existUser = await User.findOne({ email });
 
     if (existUser) {
@@ -46,9 +47,9 @@ const createUser = async (req, res) => {
         name: "Idiomas Master Admin",
         address: process.env.MAIL_USER,
       },
-      to: email, 
-      subject: "Bienvenido a Idiomas Master", 
-      html: contenidoHTML, 
+      to: email,
+      subject: "Bienvenido a Idiomas Master",
+      html: contenidoHTML,
     });
 
     if (!response) {
