@@ -25,3 +25,4 @@ const getDataPayment = async (paymentId) => {
 };
 
 module.exports = getDataPayment;
+

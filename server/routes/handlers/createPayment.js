@@ -4,11 +4,13 @@ const transporter = require("../../nodemailer");
 require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
-const getDataPayment = require("./Payments/getDatapayment");
+const getDataPayment = require("./getDataPayment");
+
 const createPayment = async (req, res) => {
   try {
     const { data } = req.body;
-    const payment = await getDataPayment(data);
+
+    const payment = await getDataPayment(data)
 
     const { date_created, transaction_amount, status, payer, course_id } =
       payment;
