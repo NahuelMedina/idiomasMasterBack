@@ -4,7 +4,7 @@ const ReviewSchema = new Schema(
   {
     rating: {
       type: Number,
-      require: true,
+      required: true,
       unique: false,
       min: 1,
       max: 5,
@@ -12,14 +12,14 @@ const ReviewSchema = new Schema(
 
     body: {
       type: String,
-      require: true,
+      required: true,
       unique: false,
       minlength: 15,
       maxlength: 300,
     },
     reply: {
       type: String,
-      require: false,
+      required: false,
       unique: false,
       minlength: 15,
       maxlength: 300,
@@ -28,21 +28,36 @@ const ReviewSchema = new Schema(
     view: {
       type: Boolean,
       unique: false,
-      require: true,
+      require: false,
       default: false,
       enum: [true, false],
+    },
+
+    student_name: {
+      type: String,
+      required: true,
+    },
+
+    student_lastname: {
+      type: String,
+      required: true,
+    },
+    
+    student_img: {
+      type: String,
+      required: true,
     },
 
     student_review: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      require: true,
+      required: true,
     },
 
     course_review: {
       type: Schema.Types.ObjectId,
       ref: "Course",
-      require: true,
+      required: true,
     },
   },
   {
