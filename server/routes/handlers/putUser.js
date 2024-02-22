@@ -1,15 +1,14 @@
 const User = require("../.././database/models/User");
-const {cloudinary} = require("../../utils/cloudinary")
-const transporter = require("../../nodemailer")
+const { cloudinary } = require("../../utils/cloudinary");
+const transporter = require("../../nodemailer");
 require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 
-
 const putUser = async (req, res) => {
   try {
-    const { name, lastname, password, email, img, age, id, profile, status } = req.body;
-
+    const { name, lastname, password, email, img, age, id, profile, status } =
+      req.body;
 
     const user = await User.findById(id);
 
@@ -26,37 +25,27 @@ const putUser = async (req, res) => {
     }
 
     if (password && password !== user.password && password.length > 5) {
-      user.password = password; 
+      user.password = password;
     }
 
     if (email && email !== user.email) {
       user.email = email;
     }
 
-
-
-    if (typeof img === "object" && img.data) {
-
-     const userImage = img.data
-
-     const uploadedImage  = await cloudinary.uploader.upload(userImage, {
-      upload_preset: "ml_default"
-     })
-
-     user.img = uploadedImage.url
-
+    if (img && img !== user.img) {
+      const uploadedImage = await cloudinary.uploader.upload(img, {
+        upload_preset: "ml_default",
+        folder: "idiomasMaster",
+      });
+      console.log("imagen subida a cloudinary con exito:", uploadedImage);
+      user.img = uploadedImage.url;
     }
-
-
 
     if (age && age !== user.age) {
       user.age = age;
     }
 
-
-   
-
-    if(profile && profile !== user.profile){
+    if (profile && profile !== user.profile) {
       user.profile = profile;
     }
 
@@ -76,9 +65,9 @@ const putUser = async (req, res) => {
         name: "Idiomas Master Admin",
         address: process.env.MAIL_USER,
       },
-      to: user.email, 
-      subject: "Cuenta Actualizada Exitosamente", 
-      html: contenidoHTML, 
+      to: user.email,
+      subject: "Cuenta Actualizada Exitosamente",
+      html: contenidoHTML,
     });
 
     if (!response) {
