@@ -49,12 +49,20 @@ const UserSchema = new Schema({
       `Por favor, inserte una contraseña válida`,
     ],
   },
+  
   img: {
     type: String,
     unique: false,
     require: false,
   },
 
+  status: {
+    type: Boolean,
+    unique: false,
+    require: false,
+    default: true,
+    enum: [true, false],
+  },
   status: {
     type: Boolean,
     unique: false,

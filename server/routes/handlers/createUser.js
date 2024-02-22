@@ -14,6 +14,7 @@ const createUser = async (req, res) => {
     if (typeof img === "object" && img.data) {
       const uploadedImage = await cloudinary.uploader.upload(img.data, {
         upload_preset: "ml_default",
+        folder: "idiomasMaster" // carpeta que se crea en cloudinary
       });
       imageUrl = uploadedImage.url;
     }
@@ -22,7 +23,7 @@ const createUser = async (req, res) => {
     const existUser = await User.findOne({ email });
 
     if (existUser) {
-      return res.status(400).send("Email is already in use");
+      return res.status(400).send('El email ya está en uso.');
     }
 
     const newUser = new User({

@@ -6,14 +6,17 @@ const fs = require("fs");
 const path = require("path");
 const User = require("../.././database/models/User");
 
-const creatReview = async (req, res) => {
+const createReview = async (req, res) => {
   try {
-    const { rating, body, user_id, course_id } = req.body;
+    const { rating, body, user_id, course_id, user_name, user_lastname, user_img } = req.body;
     const newReview = new Review({
       rating,
       body,
       student_review: user_id,
       course_review: course_id,
+      student_img: user_img,
+      student_name: user_name,
+      student_lastname: user_lastname
     });
 
     if (!newReview) {
@@ -69,4 +72,4 @@ const creatReview = async (req, res) => {
   }
 };
 
-module.exports = creatReview;
+module.exports = createReview;
