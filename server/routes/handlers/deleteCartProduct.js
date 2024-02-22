@@ -16,7 +16,7 @@ const deleteCartProduct = async (req, res) => {
 
     await cart.save();
 
-    return res.status(200).send("Course removed from the cart successfully");
+    return res.status(200).json(cart)
   } catch (error) {
     return res.status(500).send(error.message);
   }
