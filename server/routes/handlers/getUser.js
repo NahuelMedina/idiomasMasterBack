@@ -8,13 +8,15 @@ const getUser = async (req, res) => {
     const passwordUser = await User.findOne({ password });
     if (user && !user.status) {
       return res
-        .status(400)
-        .json({ message: "User Deactivated, please reactivate it again." });
+        .status(405)
+        .json({ message: "Usuario Desactivado, por favor pongase en contacto con su administrador." });
+
+        
     } else {
       if (user && passwordUser) {
         return res.status(200).json(user);
       } else {
-        return res.status(401).json({
+        return res.status(400).json({
           message:
             "Error al iniciar sesión El correo electrónico/contraseña que ingresó es incorrecto. Verifique sus credenciales o intente utilizar un método diferente para iniciar sesión.",
         });
