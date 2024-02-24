@@ -8,10 +8,10 @@ const createCourse = async (req, res) => {
     let imageUrl = "";
 
     if (image) {
-      console.log("subiendo imagen a cloudinary");
+ 
       const uploadedImage = await cloudinary.uploader.upload(image, {
         upload_preset: "ml_default",
-        folder: "idiomasMaster" // carpeta que se crea en cloudinary
+        folder: "idiomasMaster" 
       });
       console.log("imagen subida a cloudinary con exito:", uploadedImage);
       imageUrl = uploadedImage.url;
