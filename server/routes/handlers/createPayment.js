@@ -10,17 +10,15 @@ const createPayment = async (req, res) => {
   try {
     const { data } = req.body;
 
-    const payment = await getDataPayment(data)
-
-    const { date_created, transaction_amount, status, payer, course_id } =
-      payment;
-    const user_id = await User.findOne({ email: payer.email });
+    const payment = await getDataPayment(data);
+    console.log(payment);
+    const user_id = await User.findOne({ email: payment.payer_email });
     const newPayment = new Payment({
-      Amount: transaction_amount,
-      date: date_created,
-      status: status,
+      Amount: payment.transaction_amount,
+      date: payment.date_created,
+      status: payment.status,
       student_payment: user_id,
-      course_payment: course_id,
+      course_payment: payment.course_id || payment.cart_id,
     });
     if (newPayment) {
       const response = await newPayment.save();
