@@ -42,14 +42,14 @@ const createPreference = async (req, res) => {
             // currency_id: "COL",
             // description: "portatil",
             // quantity:1,
-            title: "Producto en Carrito",
+            title: "Curso(s) en Carrito",
             quantity: 1,
             unit_price: Number(req.body.price),
             currency_id: "USD",
           },
         ],
         metadata: {
-          courses: req.body.coursesCart,
+          cart_id: req.body.cart_id,
         },
         back_urls: {
           success: `http://localhost:5173/cart`,
