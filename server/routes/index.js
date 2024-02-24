@@ -59,7 +59,7 @@ routes.get("/getCoursePayment/:id", getPaymentCourse);
 routes.delete("/deleteReview/:id", deleteReview);
 routes.put("/putDeleteCourse/:id", deleteCourse);
 routes.put("/deleteUser/:id", deleteUser);
-routes.put("/putReview", putReview);
+routes.put("/putReview/:reviewId", putReview);
 routes.put("/putUser", putUser);
 routes.put("/putCourse", putCourse);
 routes.put("/putPayment", putPayment);
@@ -71,9 +71,9 @@ routes.get("/getAllPayments", getAllPayments);
 routes.get("/getAllReviews", getAllReviews);
 routes.get("/getCourseFilters", getCourseFilters);
 routes.post("/createPreference", createPreference);
-routes.get("/getCart/:id", getCart)
-routes.put("/addCartProduct", addCartProduct)
-routes.put("/deleteCartProduct", deleteCartProduct)
-routes.put("/closeCart/:id", closeCart)
+routes.get("/getCart/:id", getCart);
+routes.put("/addCartProduct", addCartProduct);
+routes.put("/deleteCartProduct", deleteCartProduct);
+routes.put("/closeCart/:id", closeCart);
 
 module.exports = routes;
