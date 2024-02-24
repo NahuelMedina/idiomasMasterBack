@@ -2,9 +2,14 @@ const Reviews = require("../.././database/models/Reviews");
 
 const putReview = async (req, res) => {
   try {
-    const { rating, body, reviewId, reply, view } = req.body;
+    const { rating, body, reply, view } = req.body;
+    const { reviewId } = req.params;
 
     const review = await Reviews.findById(reviewId);
+
+    if (!review) {
+      return res.status(404).send("Revisión no encontrada");
+    }
 
     if (rating) {
       review.rating = rating;
@@ -14,8 +19,6 @@ const putReview = async (req, res) => {
       review.body = body;
     }
 
-    console.log(reply)
-
     if (reply) {
       review.reply = reply;
     }
@@ -24,11 +27,11 @@ const putReview = async (req, res) => {
       review.view = view;
     }
 
-    
-
     await review.save();
 
-    return res.status(200).send("Review has been updated");
+    return res
+      .status(200)
+      .send("La revisión ha sido actualizada correctamente");
   } catch (error) {
     return res.status(500).send(error.message);
   }

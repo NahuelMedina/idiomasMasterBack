@@ -58,8 +58,11 @@ routes.get("/getUserPayment/:id", getPaymentUser);
 routes.get("/getCoursePayment/:id", getPaymentCourse);
 routes.delete("/deleteReview/:id", deleteReview);
 routes.put("/putDeleteCourse/:id", deleteCourse);
+
+routes.put("/putReview/:reviewId", putReview);
+
 routes.post("/deleteUser", deleteUser);
-routes.put("/putReview", putReview);
+
 routes.put("/putUser", putUser);
 routes.put("/putCourse", putCourse);
 routes.put("/putPayment", putPayment);
