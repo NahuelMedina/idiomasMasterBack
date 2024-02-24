@@ -6,14 +6,14 @@ const CourseSchema = new Schema(
       type: String,
       require: true,
       unique: false,
-      enum: ["English", "French", "German", "Italian", "Dutch", "Portuguese"],
+      enum: ["Ingles", "Frances", "Aleman", "Italiano", "Holandes", "Portugues"],
     },
 
     level: {
       type: String,
       require: true,
       unique: false,
-      enum: ["Beginner", "Intermediate", "Advanced"],
+      enum: ["Principiante", "Intermedio", "Avanzado"],
     },
 
     price: {
@@ -28,7 +28,7 @@ const CourseSchema = new Schema(
       type: String,
       requiere: true,
       unique: false,
-      enum: ["1 Month", "2 Months", "3 Months", "4 Months"],
+      enum: ["1 Mes", "2 Meses", "3 Meses", "4 Meses"],
     },
 
     schedule: {
@@ -36,10 +36,10 @@ const CourseSchema = new Schema(
       require: true,
       unique: false,
       enum: [
-        "On Weekends",
-        "During the week",
-        "Monday-Wednesday-Friday",
-        "Tuesday-Thursday",
+        "Fines de semana",
+        "Durante la semana",
+        "Lunes, Miércoles, Viernes",
+        "Martes, Jueves",
       ],
     },
 
