@@ -6,7 +6,7 @@ const AddUserCourse = async (req, res) => {
 
     const course = await Course.findById(courseId);
     if (!course) {
-      return res.status(404).send("Couse doesn't exist");
+      return res.status(404).send("Course doesn't exist");
     }
 
     if (course.students.includes(userId)) {

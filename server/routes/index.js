@@ -58,7 +58,7 @@ routes.get("/getUserPayment/:id", getPaymentUser);
 routes.get("/getCoursePayment/:id", getPaymentCourse);
 routes.delete("/deleteReview/:id", deleteReview);
 routes.put("/putDeleteCourse/:id", deleteCourse);
-routes.put("/deleteUser/:id", deleteUser);
+routes.post("/deleteUser", deleteUser);
 routes.put("/putReview", putReview);
 routes.put("/putUser", putUser);
 routes.put("/putCourse", putCourse);

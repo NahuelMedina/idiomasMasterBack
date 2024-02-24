@@ -74,7 +74,7 @@ const putUser = async (req, res) => {
       return res.status(400).send("Welcome Email cannot been delivered");
     }
 
-    return res.status(200).send("User has been updated");
+    return res.status(200).send(user);
   } catch (error) {
     return res.status(500).send(error.message);
   }

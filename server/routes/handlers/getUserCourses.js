@@ -3,6 +3,7 @@ const Course = require("../.././database/models/Course");
 const getUserCourses = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(id)
 
     const course = await Course.find({ students: id });
 

@@ -4,15 +4,10 @@ const getGoogleUser = async (req, res) => {
   try {
     const { email, name, lastname, image } = req.body;
 
-    console.log(email);
-    console.log(name);
-    console.log(lastname);
-    console.log(image);
-
-    // Buscar el usuario por correo electrónico
+   
+  
     let user = await User.findOne({ email });
 
-    console.log(user);
 
     let imageUrl = "";
     imageUrl = image;
