@@ -43,10 +43,9 @@ const putCourse = async (req, res) => {
       course.start_time = start_time;
     }
 
-    if (finish_time&& course.finish_time !== finish_time) {
+    if (finish_time && course.finish_time !== finish_time) {
       course.finish_time = finish_time;
     }
-
 
     if (location && course.location !== location) {
       course.location = location;
@@ -56,13 +55,13 @@ const putCourse = async (req, res) => {
       course.location = schedule;
     }
 
-    if (typeof image === "object" && image.data) {
-      const uploadedImage = await cloudinary.uploader.upload(image.data, {
+    if (image && course.image !== image) {
+      const uploadedImage = await cloudinary.uploader.upload(image, {
         upload_preset: "ml_default",
+        folder: "idiomasMaster",
       });
       course.image = uploadedImage.url;
     }
-
 
     if (status !== undefined && course.status !== status) {
       course.status = status;
