@@ -37,7 +37,6 @@ const putUser = async (req, res) => {
         upload_preset: "ml_default",
         folder: "idiomasMaster",
       });
-      console.log("imagen subida a cloudinary con exito:", uploadedImage);
       user.img = uploadedImage.url;
     }
 
