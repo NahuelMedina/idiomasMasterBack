@@ -28,9 +28,9 @@ const createPreference = async (req, res) => {
           user_id: req.body.user._id,
         },
         back_urls: {
-          success: `https://idiomasmaster-toqy.onrender.com/detail/${req.body._id}`,
-          failure: `https://idiomasmaster-toqy.onrender.com/detail/${req.body._id}`,
-          pending: `https://idiomasmaster-toqy.onrender.com/detail/${req.body._id}`,
+          success: `https://idiomasmaster-toqy.onrender.com/detail/${req.body.detail_product.product_id}`,
+          failure: `https://idiomasmaster-toqy.onrender.com/detail/${req.body.detail_product.product_id}`,
+          pending: `https://idiomasmaster-toqy.onrender.com/detail/${req.body.detail_product.product_id}`,
         },
         auto_return: "approved",
       };
