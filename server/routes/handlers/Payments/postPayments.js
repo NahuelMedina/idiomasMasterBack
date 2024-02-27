@@ -8,28 +8,29 @@ const createPreference = async (req, res) => {
   console.log(req.body);
   let body = {};
   try {
-    if (req.body.language) {
+    if (req.body.detail_product) {
       body = {
         items: [
           {
-            // title: "computadora",
-            // unit_price: 200,
-            // currency_id: "COL",
-            // description: "portatil",
-            // quantity:1,
-            title: req.body.language + req.body.level,
+            title: req.body.detail_product.name,
             quantity: 1,
-            unit_price: Number(req.body.price),
+            unit_price: Number(req.body.detail_product.price),
             currency_id: "USD",
           },
         ],
+        payer: {
+          name: req.body.user.name,
+          surname: req.body.user.lastname,
+          email: req.body.user.email,
+        },
         metadata: {
-          course_id: req.body._id,
+          course_id: req.body.detail_product.product_id,
+          user_id: req.body.user._id,
         },
         back_urls: {
-          success: `http://localhost:5173/detail/${req.body._id}`,
-          failure: "http://localhost:5173/",
-          pending: "http://localhost:5173/",
+          success: `https://idiomasmaster-toqy.onrender.com/detail/${req.body._id}`,
+          failure: `https://idiomasmaster-toqy.onrender.com/detail/${req.body._id}`,
+          pending: `https://idiomasmaster-toqy.onrender.com/detail/${req.body._id}`,
         },
         auto_return: "approved",
       };
@@ -37,11 +38,6 @@ const createPreference = async (req, res) => {
       body = {
         items: [
           {
-            // title: "computadora",
-            // unit_price: 200,
-            // currency_id: "COL",
-            // description: "portatil",
-            // quantity:1,
             title: "Curso(s) en Carrito",
             quantity: 1,
             unit_price: Number(req.body.price),
@@ -50,11 +46,17 @@ const createPreference = async (req, res) => {
         ],
         metadata: {
           cart_id: req.body.cart_id,
+          user_id: req.body.user._id,
+        },
+        payer: {
+          name: req.body.user.name,
+          surname: req.body.user.lastname,
+          email: req.body.user.email,
         },
         back_urls: {
-          success: `http://localhost:5173/cart`,
-          failure: "http://localhost:5173/",
-          pending: "http://localhost:5173/",
+          success: `https://idiomasmaster-toqy.onrender.com/cart`,
+          failure: "https://idiomasmaster-toqy.onrender.com/cart",
+          pending: "https://idiomasmaster-toqy.onrender.com/cart",
         },
         auto_return: "approved",
       };

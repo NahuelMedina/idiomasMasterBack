@@ -12,7 +12,7 @@ const createPayment = async (req, res) => {
 
     const payment = await getDataPayment(data);
     console.log(payment);
-    const user_id = await User.findOne({ email: payment.payer_email });
+    const user_id = await User.findOne({ _id: payment.payer_id });
     const newPayment = new Payment({
       Amount: payment.transaction_amount,
       date: payment.date_created,

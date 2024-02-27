@@ -12,7 +12,7 @@ const getDataPayment = async (paymentId) => {
       date_created: payment.date_created,
       transaction_amount: payment.transaction_amount,
       status: payment.status,
-      payer: payment.payer,
+      payer_id: payment.metadata.user_id,
       course_id: payment.metadata.course_id,
     };
   } else {
@@ -20,7 +20,7 @@ const getDataPayment = async (paymentId) => {
       date_created: payment.date_created,
       transaction_amount: payment.transaction_amount,
       status: payment.status,
-      payer_email: payment.payer.email,
+      payer_id: payment.metadata.user_id,
       cart_id: payment.metadata.cart_id,
     };
   }
