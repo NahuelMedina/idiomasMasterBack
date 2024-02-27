@@ -1,5 +1,7 @@
 const Payment = require("../.././database/models/Payment");
 const User = require("../.././database/models/User");
+const Cart = require("../.././database/models/Cart")
+const Course = require("../.././database/models/Course")
 const transporter = require("../../nodemailer");
 require("dotenv").config();
 const fs = require("fs");
@@ -22,6 +24,42 @@ const createPayment = async (req, res) => {
     });
     if (newPayment) {
       const response = await newPayment.save();
+
+
+      const cart = await Cart.findById(course_payment);
+
+      if (!cart) {
+        const course = await Course.findById(course_payment);
+        if (!course) {
+          return res.status(404).send("Course doesn't exist");
+        }
+      
+        if (course.students.includes(student_payment)) {
+          return res.status(400).send("User already is in the Course");
+        }
+      
+        course.students.push(student_payment);
+        await course.save();
+      } else {
+        for (const courseId of cart.courses) {
+          const course = await Course.findById(courseId);
+          if (!course) {
+            return res.status(404).send("Course doesn't exist");
+          }
+      
+          if (course.students.includes(student_payment)) {
+            return res.status(400).send("User already is in the Course");
+          }
+      
+          course.students.push(student_payment);
+          await course.save();
+        }
+
+        cart.status = "shopped";
+        await cart.save();
+      }
+      
+  
 
       const idString = response._id.toString();
 
