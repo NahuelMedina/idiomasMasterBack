@@ -38,6 +38,7 @@ const getCart = require("./handlers/getCart");
 const addCartProduct = require("./handlers/addCartCourse");
 const deleteCartProduct = require("./handlers/deleteCartProduct");
 const closeCart = require("./handlers/closeCart");
+const getShoppedCart = require("./handlers/getShoppedCart");
 
 routes.post("/createUser", createUser);
 routes.post("/createCourse", createCourse);
@@ -78,5 +79,6 @@ routes.get("/getCart/:id", getCart);
 routes.put("/addCartProduct", addCartProduct);
 routes.put("/deleteCartProduct", deleteCartProduct);
 routes.put("/closeCart/:id", closeCart);
+routes.get("/getShoppedCart/:id", getShoppedCart);
 
 module.exports = routes;

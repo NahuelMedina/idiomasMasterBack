@@ -11,6 +11,8 @@ const getCart = async (req, res) => {
         student: id,
         status: "waiting",
       }).save();
+
+      return res.status(200).json(cart);
     }
 
     return res.status(200).json(cart);
