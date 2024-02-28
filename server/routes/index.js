@@ -40,7 +40,6 @@ const getShoppedCart = require("./handlers/getShoppedCart");
 
 const routes = Router();
 
-
 routes.post("/createUser", createUser);
 routes.post("/createCourse", createCourse);
 routes.post("/createReview", createReview);
