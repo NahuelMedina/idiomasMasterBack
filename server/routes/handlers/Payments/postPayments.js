@@ -17,7 +17,7 @@ const createPreference = async (req, res) => {
             // currency_id: "COL",
             // description: "portatil",
             // quantity:1,
-            title: req.body.language + req.body.level,
+            title: req.body.language + " " + req.body.level,
             quantity: 1,
             unit_price: Number(req.body.price),
             currency_id: "USD",

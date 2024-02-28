@@ -24,13 +24,9 @@ const AddUserCourse = require("./handlers/addUserCourse");
 const deleteUserCourse = require("./handlers/deteleUserCourse");
 const getAllCourses = require("./handlers/getAllCourse");
 const getCourseFilters = require("./handlers/getCourseFilters");
-
 const getAllUsers = require("./handlers/getAllUsers");
 const getAllPayments = require("./handlers/getAllPayments");
 const getAllReviews = require("./handlers/getAllReviews");
-
-const routes = Router();
-
 const createPreference = require("./handlers/Payments/postPayments");
 const getUserById = require("./handlers/getUserbyId");
 const getGoogleUser = require("./handlers/getGoogleUser");
@@ -38,6 +34,11 @@ const getCart = require("./handlers/getCart");
 const addCartProduct = require("./handlers/addCartCourse");
 const deleteCartProduct = require("./handlers/deleteCartProduct");
 const closeCart = require("./handlers/closeCart");
+const createMessage = require("./handlers/createMessage")
+const getMessage = require("./handlers/getMessage")
+
+const routes = Router();
+
 
 routes.post("/createUser", createUser);
 routes.post("/createCourse", createCourse);
@@ -75,5 +76,7 @@ routes.get("/getCart/:id", getCart);
 routes.put("/addCartProduct", addCartProduct);
 routes.put("/deleteCartProduct", deleteCartProduct);
 routes.put("/closeCart/:id", closeCart);
+routes.post("/createMessage", createMessage);
+routes.get("/getMessage", getMessage);
 
 module.exports = routes;
