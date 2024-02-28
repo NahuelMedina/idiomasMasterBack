@@ -1,14 +1,24 @@
+const Cart = require("../../database/models/Cart");
+
 const addCartProduct = async (req, res) => {
   try {
     const { CoursesArray, CartId } = req.body;
 
+  
+    console.log(CartId)
+    console.log(CoursesArray)
+
     let cart = await Cart.findById(CartId);
+
+    console.log(cart)
+    console.log(CartId)
+    console.log(CoursesArray)
 
     if (!cart) {
       return res.status(404).send("Cart doesn't exist");
     }
 
-    // Verificar si el estado del carrito es 'shopped'
+
     if (cart.status === 'shopped') {
       return res.status(400).send("Cannot modify a shopped cart");
     }
