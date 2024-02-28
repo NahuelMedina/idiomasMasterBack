@@ -36,10 +36,10 @@ const deleteCartProduct = require("./handlers/deleteCartProduct");
 const closeCart = require("./handlers/closeCart");
 const createMessage = require("./handlers/createMessage")
 const getMessage = require("./handlers/getMessage")
+const getShoppedCart = require("./handlers/getShoppedCart");
 
 const routes = Router();
 
-const getShoppedCart = require("./handlers/getShoppedCart");
 
 routes.post("/createUser", createUser);
 routes.post("/createCourse", createCourse);
