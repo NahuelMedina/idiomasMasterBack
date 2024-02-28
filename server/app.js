@@ -5,19 +5,22 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const path = require('path'); // Agrega esta línea para manejar rutas de archivos estáticos
 const cors = require('cors');
+const http = require('http')
+const { Server: Socketsever } = require('socket.io')
+const createServer = require('node:http')
 
 
 require("./database/MongoBD.js");
 
-const server = express();
+const app = express();
 
-server.name = "API";
+app.name = "API";
 
-server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-server.use(bodyParser.json({ limit: "50mb" }));
-server.use(cookieParser());
-server.use(morgan("dev"));
-server.use((req, res, next) => {
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(cookieParser());
+app.use(morgan("dev"));
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
@@ -27,18 +30,57 @@ server.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
-server.use(morgan('dev'));
-server.use(express.json());
+
+app.use(express.json());
+
+// creemos el servidor con el modulo http
+const server = http.createServer(app)
+const io = new Socketsever(server, {
+  cors: {
+    origin: '*'
+  }
+})
 
 // Configuración del middleware para servir archivos estáticos (necesario para el enrutamiento del lado del cliente)
-server.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-server.use('/', routes);
+app.use('/', routes);
 
-server.use(cors());
+app.use(cors());
+
+
+
+io.on('connection', (socket) => {
+  console.log(socket.id);
+  console.log(`Usuario actual: ${socket.id}`)
+
+  socket.on("join_room",(data)=>{
+    socket.join(data)
+    console.log(`Usuario con id: ${socket.id} se unió a la sala: ${data}`)
+  }
+  )
+  socket.on("send_message",(data)=>{
+    socket.to(data.room).emit("receive_message", data)
+    // console.log("Mensaje recibido");
+    // console.log(data);
+  })
+
+  socket.on("disconnect", ()=>{
+    console.log("usuario desconectado", socket.id);
+  })
+
+  // socket.on('message', (message, nickname) => {
+  //   //Envio al resto clients
+  //   socket.broadcast.emit('message', {
+  //     body: message,
+  //     from: nickname
+  //   })
+  // })
+})
+
 
 // Error catching endware.
-server.use((err, req, res, next) => {
+app.use((err, req, res, next) => {
   // eslint-disable-line no-unused-vars
   const status = err.status || 500;
   const message = err.message || err;
