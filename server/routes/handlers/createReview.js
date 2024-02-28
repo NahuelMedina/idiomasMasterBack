@@ -9,6 +9,7 @@ const User = require("../.././database/models/User");
 const createReview = async (req, res) => {
   try {
     const { rating, body, user_id, course_id, user_name, user_lastname, user_img } = req.body;
+    console.log("hola-->", user_img )
     const newReview = new Review({
       rating,
       body,
