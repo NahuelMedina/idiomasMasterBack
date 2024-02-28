@@ -39,6 +39,7 @@ const getMessage = require("./handlers/getMessage")
 
 const routes = Router();
 
+const getShoppedCart = require("./handlers/getShoppedCart");
 
 routes.post("/createUser", createUser);
 routes.post("/createCourse", createCourse);
@@ -59,8 +60,11 @@ routes.get("/getUserPayment/:id", getPaymentUser);
 routes.get("/getCoursePayment/:id", getPaymentCourse);
 routes.delete("/deleteReview/:id", deleteReview);
 routes.put("/putDeleteCourse/:id", deleteCourse);
+
+routes.put("/putReview/:reviewId", putReview);
+
 routes.post("/deleteUser", deleteUser);
-routes.put("/putReview", putReview);
+
 routes.put("/putUser", putUser);
 routes.put("/putCourse", putCourse);
 routes.put("/putPayment", putPayment);
@@ -78,5 +82,6 @@ routes.put("/deleteCartProduct", deleteCartProduct);
 routes.put("/closeCart/:id", closeCart);
 routes.post("/createMessage", createMessage);
 routes.get("/getMessage", getMessage);
+routes.get("/getShoppedCart/:id", getShoppedCart);
 
 module.exports = routes;

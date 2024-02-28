@@ -45,7 +45,7 @@ const ReviewSchema = new Schema(
     
     student_img: {
       type: String,
-      required: true,
+      required: false,
     },
 
     student_review: {
